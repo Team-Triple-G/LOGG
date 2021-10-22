@@ -2,6 +2,8 @@ package com.ggg.logg.controller;
 
 
 import com.ggg.logg.model.ApiResponse;
+import com.ggg.logg.model.dto.UserDto;
+import com.ggg.logg.model.request.user.UserLoginRequest;
 import com.ggg.logg.model.response.user.UserLoginResponse;
 import com.ggg.logg.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +21,12 @@ public class UserController {
 
   @PostMapping("/login")
   public ApiResponse<UserLoginResponse> loginByUserIdAndPassword(
-      @RequestBody UserLoginResponse userLoginResponse) {
-    return null;
+      @RequestBody UserLoginRequest userLoginRequest) {
+
+    UserDto userDto = userService.loginByUserIdAndPassword(userLoginRequest.getUserId(),
+        userLoginRequest.getUserPassword());
+    return ApiResponse.of(201, "success",
+        UserLoginResponse.builder().isSuccess(true).userDto(userDto).build());
   }
 
 }

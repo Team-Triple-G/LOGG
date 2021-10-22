@@ -1,16 +1,16 @@
 package com.ggg.logg.model.response.user;
 
+import com.ggg.logg.model.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginResponse {
-  User user;
+  UserDto userDto;
   boolean isSuccess;
 }
