@@ -2,6 +2,9 @@ package com.ggg.logg.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.ggg.logg.model.dto.UserDto;
+import com.ggg.logg.model.exception.IllegalPasswordException;
+import com.ggg.logg.model.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,12 +24,14 @@ class UserServiceTest {
     //given
     final String TEST_ID = "GGG";
     final String TEST_PASSWORD = "gurogarbageguys";
+    final String TEST_NICKNAME = "쓰레기맨";
 
     //when
-//    boolean result =
+    UserDto userDto = userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD);
 
     //then
-    assertDoesNotThrow(userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD));
+    assertNotNull(userDto);
+    assertEquals(userDto.getUserName(), TEST_NICKNAME);
   }
 
   @Test
@@ -35,16 +40,23 @@ class UserServiceTest {
     //given
     final String TEST_ID = "GGG";
     final String TEST_PASSWORD = "gurogarbageguys";
+    final String TEST_NICKNAME = "쓰레기맨";
 
     final String WRONG_ID = "GGg";
     final String WRONG_PASSWORD = "gurogarbageguy";
 
     //when
-    boolean idFailureResult = userService.loginByUserIdAndPassword(WRONG_ID, TEST_PASSWORD);
-    boolean passwordFailureResult = userService.loginByUserIdAndPassword(TEST_ID, WRONG_PASSWORD);
+    UserDto idFailureUserDto = null;
+    UserDto passwordFailureResultUserDto = null;
+    try {
+      idFailureUserDto = userService.loginByUserIdAndPassword(WRONG_ID, TEST_PASSWORD);
+      passwordFailureResultUserDto = userService.loginByUserIdAndPassword(TEST_ID,
+          WRONG_PASSWORD);
+    } catch (NotFoundException | IllegalPasswordException ignored) {
+    }
 
     //then
-    assertFalse(idFailureResult);
-    assertFalse(passwordFailureResult);
+    assertNull(idFailureUserDto);
+    assertNull(passwordFailureResultUserDto);
   }
 }
