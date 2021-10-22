@@ -23,10 +23,10 @@ class UserServiceTest {
     final String TEST_PASSWORD = "gurogarbageguys";
 
     //when
-    boolean result = userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD);
+//    boolean result =
 
     //then
-    assertTrue(result);
+    assertDoesNotThrow(userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD));
   }
 
   @Test
