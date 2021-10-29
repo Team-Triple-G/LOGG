@@ -7,11 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ggg.logg.model.ApiResponse;
 import com.ggg.logg.model.dto.UserDto;
 import com.ggg.logg.model.exception.ResourceNotFoundException;
+import com.ggg.logg.model.exception.user.IllegalPasswordException;
 import com.ggg.logg.model.request.user.UserLoginRequest;
 import com.ggg.logg.model.response.user.UserLoginResponse;
 import com.ggg.logg.service.UserService;
@@ -72,12 +72,6 @@ class UserControllerTest {
     mockMvcPostAssert(uri, content, exceptedResultString, status().isCreated());
   }
 
-//  throw new ResourceNotFoundException("userId", "user", userId);
-//}
-//    if (!userPassword.equals(TEMP_USER_PASSWORD)) {
-//        throw new IllegalPasswordException(userId, userPassword);
-//        }
-
   @Test
   @DisplayName("존재하지 않는 사용자 ID를 입력하면 404 응답을 보낸다.")
   public void invalidIdLoginFailureTest() throws Exception {
@@ -98,6 +92,27 @@ class UserControllerTest {
 
     //then
     mockMvcPostAssert(uri, content, exceptedResultString, status().isNotFound());
+  }
+
+  @Test
+  @DisplayName("올바르지 않은 비밀번호를 입력하면 404 응답을 보낸다.")
+  public void invalidPasswordLoginFailureTest() throws Exception {
+    //given
+    IllegalPasswordException exceptedException =  new IllegalPasswordException(TEST_ID, INVALID_PASSWORD);
+    given(this.userService.loginByUserIdAndPassword(TEST_ID, INVALID_PASSWORD))
+        .willThrow(exceptedException);
+    String uri = "/api/v1/user/login";
+
+    //when
+    UserLoginRequest userLoginRequest = new UserLoginRequest(TEST_ID, INVALID_PASSWORD);
+    String content = objectMapper.writeValueAsString(userLoginRequest);
+
+    ApiResponse<?> response = ApiResponse.of(HttpStatus.UNAUTHORIZED, exceptedException.getMessage(),
+        null);
+    String exceptedResultString = objectMapper.writeValueAsString(response);
+
+    //then
+    mockMvcPostAssert(uri, content, exceptedResultString, status().isUnauthorized());
   }
 
   private void mockMvcPostAssert(String uri, String content, String exceptedResultString,
