@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public class ResourceNotFoundException extends RuntimeException {
 
-  final HttpStatus responseStatus = HttpStatus.NOT_FOUND;
+  public static final HttpStatus responseStatus = HttpStatus.NOT_FOUND;
   String resourceName;
   String key;
   Object value;
