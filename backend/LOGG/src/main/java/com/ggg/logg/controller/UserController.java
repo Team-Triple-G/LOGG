@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -26,7 +26,7 @@ public class UserController {
     UserDto userDto = userService.loginByUserIdAndPassword(userLoginRequest.getUserId(),
         userLoginRequest.getUserPassword());
     return ApiResponse.of(201, "success",
-        UserLoginResponse.builder().isSuccess(true).userDto(userDto).build());
+        UserLoginResponse.ofUserDto(userDto));
   }
 
 }

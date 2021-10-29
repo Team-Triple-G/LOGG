@@ -1,16 +1,19 @@
 package com.ggg.logg.model.response.user;
 
 import com.ggg.logg.model.dto.UserDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserLoginResponse {
-  UserDto userDto;
-  boolean isSuccess;
+  String userId;
+  String userNickname;
+
+  public UserLoginResponse(UserDto userDto) {
+    this.userId = userDto.getUserId();
+    this.userNickname = userDto.getUserNickname();
+  }
+
+  public static UserLoginResponse ofUserDto(UserDto userDto) {
+    return new UserLoginResponse(userDto);
+  }
 }

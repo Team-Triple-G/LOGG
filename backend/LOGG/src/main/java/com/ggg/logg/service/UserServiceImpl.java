@@ -1,7 +1,7 @@
 package com.ggg.logg.service;
 
 import com.ggg.logg.model.dto.UserDto;
-import com.ggg.logg.model.exception.IllegalPasswordException;
+import com.ggg.logg.model.exception.user.IllegalPasswordException;
 import com.ggg.logg.model.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,6 @@ public class UserServiceImpl implements UserService {
     if (!userPassword.equals(TEMP_USER_PASSWORD)) {
       throw new IllegalPasswordException(userId, userPassword);
     }
-    return UserDto.builder().userId(userId).userName(TEMP_USER_NICKNAME).build();
+    return UserDto.builder().userId(userId).userNickname(TEMP_USER_NICKNAME).build();
   }
 }

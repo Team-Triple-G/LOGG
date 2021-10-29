@@ -1,4 +1,4 @@
-package com.ggg.logg.model.exception;
+package com.ggg.logg.model.exception.user;
 
 public class IllegalPasswordException extends RuntimeException {
 
