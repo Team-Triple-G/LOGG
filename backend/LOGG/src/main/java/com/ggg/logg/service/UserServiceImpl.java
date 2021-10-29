@@ -2,7 +2,7 @@ package com.ggg.logg.service;
 
 import com.ggg.logg.model.dto.UserDto;
 import com.ggg.logg.model.exception.user.IllegalPasswordException;
-import com.ggg.logg.model.exception.NotFoundException;
+import com.ggg.logg.model.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDto loginByUserIdAndPassword(String userId, String userPassword) {
     if (!userId.equals(TEMP_USER_ID)) {
-      throw new NotFoundException("userId", "user", userId);
+      throw new ResourceNotFoundException("userId", "user", userId);
     }
     if (!userPassword.equals(TEMP_USER_PASSWORD)) {
       throw new IllegalPasswordException(userId, userPassword);

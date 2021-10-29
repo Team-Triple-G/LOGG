@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.ggg.logg.model.dto.UserDto;
 import com.ggg.logg.model.exception.user.IllegalPasswordException;
-import com.ggg.logg.model.exception.NotFoundException;
+import com.ggg.logg.model.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,7 +46,7 @@ class UserServiceTest {
     UserDto idFailureUserDto = null;
     try {
       idFailureUserDto = userService.loginByUserIdAndPassword(WRONG_ID, TEST_PASSWORD);
-    } catch (NotFoundException | IllegalPasswordException ignored) {
+    } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
     //then
@@ -65,7 +65,7 @@ class UserServiceTest {
     try {
       passwordFailureResultUserDto = userService.loginByUserIdAndPassword(TEST_ID,
           WRONG_PASSWORD);
-    } catch (NotFoundException | IllegalPasswordException ignored) {
+    } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
     //then
