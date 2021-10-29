@@ -6,10 +6,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static com.ggg.logg.TestConstant.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ggg.logg.model.ApiResponse;
-import com.ggg.logg.model.dto.UserDto;
 import com.ggg.logg.model.exception.ResourceNotFoundException;
 import com.ggg.logg.model.exception.user.IllegalPasswordException;
 import com.ggg.logg.model.request.user.UserLoginRequest;
@@ -29,15 +29,6 @@ import org.springframework.test.web.servlet.ResultMatcher;
 @MockMvcFilterConfig
 @WebMvcTest(UserController.class)
 class UserControllerTest {
-
-  private final String TEST_ID = "GGG";
-  private final String TEST_PASSWORD = "gurogarbageguys";
-  private final String TEST_NICKNAME = "쓰레기맨";
-  private final UserDto TEST_USER_DTO =
-      UserDto.builder().userId(TEST_ID).userNickname(TEST_NICKNAME).build();
-
-  private final String INVALID_ID = "Ggg";
-  private final String INVALID_PASSWORD = "gugugur";
 
   @Autowired
   private MockMvc mockMvc;
