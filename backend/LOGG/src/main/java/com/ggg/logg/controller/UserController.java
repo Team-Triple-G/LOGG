@@ -7,6 +7,7 @@ import com.ggg.logg.model.request.user.UserLoginRequest;
 import com.ggg.logg.model.response.user.UserLoginResponse;
 import com.ggg.logg.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class UserController {
 
     UserDto userDto = userService.loginByUserIdAndPassword(userLoginRequest.getUserId(),
         userLoginRequest.getUserPassword());
-    return ApiResponse.of(201, "success",
+    return ApiResponse.of(HttpStatus.CREATED, "success",
         UserLoginResponse.ofUserDto(userDto));
   }
 
