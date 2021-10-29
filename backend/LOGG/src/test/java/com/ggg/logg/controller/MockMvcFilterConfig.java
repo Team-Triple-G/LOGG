@@ -1,5 +1,6 @@
-package com.ggg.logg;
+package com.ggg.logg.controller;
 
+import com.ggg.logg.controller.MockMvcFilterConfig.MockMVcFilterConfig;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,11 +15,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Retention(RetentionPolicy.RUNTIME)
 @AutoConfigureMockMvc
 @Import({
-    MockMvcFilterConfig.Config.class,
+    MockMVcFilterConfig.class,
 })
 @interface MockMvcFilterConfig {
 
-  class Config {
+  class MockMVcFilterConfig {
     @Bean
     MockMvcBuilderCustomizer utf8Config() {
       return builder ->

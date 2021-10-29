@@ -10,6 +10,7 @@ class LoggApplicationTests {
   @Test
   @DisplayName("스프링 부트를 정상적으로 동작시킨다.")
   void contextLoads() {
+    LoggApplication.main(new String[]{});
   }
 
 }
