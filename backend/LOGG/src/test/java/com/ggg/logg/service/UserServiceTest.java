@@ -1,6 +1,7 @@
 package com.ggg.logg.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.ggg.logg.TestConstant.*;
 
 import com.ggg.logg.model.dto.UserDto;
 import com.ggg.logg.model.exception.user.IllegalPasswordException;
@@ -12,11 +13,6 @@ import org.junit.jupiter.api.Test;
 class UserServiceTest {
 
   UserService userService;
-
-  final String TEST_ID = "GGG";
-  final String TEST_PASSWORD = "gurogarbageguys";
-  final String TEST_NICKNAME = "쓰레기맨";
-
   @BeforeEach
   public void setUp() {
     userService = new UserServiceImpl();
@@ -40,12 +36,10 @@ class UserServiceTest {
   public void invalidIdLoginTest() {
     //given
 
-    final String WRONG_ID = "GGg";
-
     //when
     UserDto idFailureUserDto = null;
     try {
-      idFailureUserDto = userService.loginByUserIdAndPassword(WRONG_ID, TEST_PASSWORD);
+      idFailureUserDto = userService.loginByUserIdAndPassword(INVALID_ID, TEST_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
@@ -58,13 +52,11 @@ class UserServiceTest {
   public void invalidPasswordLoginTest() {
     //given
 
-    final String WRONG_PASSWORD = "gurogarbageguy";
-
     //when
     UserDto passwordFailureResultUserDto = null;
     try {
       passwordFailureResultUserDto = userService.loginByUserIdAndPassword(TEST_ID,
-          WRONG_PASSWORD);
+          INVALID_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 

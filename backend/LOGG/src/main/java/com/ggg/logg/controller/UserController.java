@@ -22,13 +22,13 @@ public class UserController {
   private final UserService userService;
 
   @PostMapping("/login")
-  @ResponseStatus(value = HttpStatus.CREATED)
+  @ResponseStatus(value = HttpStatus.OK)
   public ApiResponse<UserLoginResponse> loginByUserIdAndPassword(
       @RequestBody UserLoginRequest userLoginRequest) {
 
     UserDto userDto = userService.loginByUserIdAndPassword(userLoginRequest.getUserId(),
         userLoginRequest.getUserPassword());
-    return ApiResponse.of(HttpStatus.CREATED, "success",
+    return ApiResponse.of(HttpStatus.OK, "success",
         UserLoginResponse.ofUserDto(userDto));
   }
 
