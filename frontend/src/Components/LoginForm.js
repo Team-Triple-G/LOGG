@@ -24,35 +24,23 @@ export default function Login() {
         )
         .then(res => {
             console.log(res)
-            const data = res.data.data;
+            const data = res.data;
 
-            console.log(data)
-            console.log('data.data.userId :: ', data.userId)
-            console.log('data.data.userId :: ', data.userNickname)
-            // if(res.data.userId === undefined){
-            //     // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-            //     console.log('======================',res.data.msg)
-            //     alert('입력하신 id 가 일치하지 않습니다.')
-            // } else if(res.data.userId === null){
-            //     // id는 있지만, pw 는 다른 경우 userId = null , msg = undefined
-            //     console.log('======================','입력하신 비밀번호 가 일치하지 않습니다.')
-            //     alert('입력하신 비밀번호 가 일치하지 않습니다.')
-            // } else if(res.data.userId === inputId) {
-            //     // id, pw 모두 일치 userId = userId1, msg = undefined
-            //     console.log('======================','로그인 성공')
-            //     sessionStorage.setItem('user_id', inputId)
-            // }
-            // // 작업 완료 되면 페이지 이동(새로고침)
+            console.log(data.data)
+            console.log('userId: ', data.data.userId)
+            console.log('userNickName: ', data.data.userNickname)
+            console.log('userPassword: ', data.data.userPassword)
+            if(data.data.userId === inputId) {
+                console.log('======================','로그인 성공')
+            }
+            // 작업 완료 되면 페이지 이동(새로고침)
             // document.location.href = '/'
         })
         .catch(error => {
             console.log(error.response)
             const status = error.response.status;
             console.log(status);
-
-            // if(status === 401){}
-            // console.log(err.data)
-            // console.log(err.status)
+            alert('아이디와 비밀번호를 확인해 주세요.')
         })
     }
 
