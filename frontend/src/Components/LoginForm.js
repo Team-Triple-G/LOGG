@@ -25,13 +25,16 @@ export default function Login() {
         .then(res => {
             console.log(res)
             const data = res.data;
-
             console.log(data.data)
             console.log('userId: ', data.data.userId)
             console.log('userNickName: ', data.data.userNickname)
             console.log('userPassword: ', data.data.userPassword)
             if(data.data.userId === inputId) {
                 console.log('======================','로그인 성공')
+                localStorage.setItem('userId', inputId)
+                localStorage.setItem('userNickName', data.data.userNickname)
+                localStorage.setItem('userPassword', inputPassword)
+                console.log(localStorage)
             }
             // 작업 완료 되면 페이지 이동(새로고침)
             // document.location.href = '/'
