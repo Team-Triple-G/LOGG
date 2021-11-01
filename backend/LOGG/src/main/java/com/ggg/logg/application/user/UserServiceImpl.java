@@ -1,11 +1,12 @@
 package com.ggg.logg.application.user;
 
 import com.ggg.logg.domain.user.User;
+import com.ggg.logg.domain.user.UserDetail;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
 import com.ggg.logg.domain.common.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("UserService")
 public class UserServiceImpl implements UserService {
 
   private final String TEMP_USER_ID = "GGG";
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
     if (!userPassword.equals(TEMP_USER_PASSWORD)) {
       throw new IllegalPasswordException(userId, userPassword);
     }
-    return User.builder().userId(userId).userNickname(TEMP_USER_NICKNAME).build();
+    return User.builder().userId(userId).userDetail(UserDetail.builder()
+        .userNickname(TEMP_USER_NICKNAME).build()).build();
   }
 }

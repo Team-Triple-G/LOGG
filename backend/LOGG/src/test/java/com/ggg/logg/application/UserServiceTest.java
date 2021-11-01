@@ -30,7 +30,7 @@ class UserServiceTest {
 
     //then
     assertNotNull(user);
-    assertEquals(user.getUserNickname(), TEST_NICKNAME);
+    assertEquals(user.getUserDetail().getUserNickname(), TEST_NICKNAME);
   }
 
   @Test

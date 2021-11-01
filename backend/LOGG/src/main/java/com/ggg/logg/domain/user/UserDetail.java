@@ -1,18 +1,16 @@
 package com.ggg.logg.domain.user;
 
-import com.ggg.logg.domain.common.DomainModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
-@DomainModel
-@Getter
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-  String userId;
-  UserDetail userDetail;
+public class UserDetail {
+  String userNickname;
+  String email;
+  String description;
 }

@@ -10,7 +10,7 @@ public class UserLoginResponse {
 
   public UserLoginResponse(User user) {
     this.userId = user.getUserId();
-    this.userNickname = user.getUserNickname();
+    this.userNickname = user.getUserDetail().getUserNickname();
   }
 
   public static UserLoginResponse ofUserDto(User user) {
