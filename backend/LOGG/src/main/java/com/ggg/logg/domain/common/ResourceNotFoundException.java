@@ -1,4 +1,4 @@
-package com.ggg.logg.model.exception;
+package com.ggg.logg.domain.common;
 
 import org.springframework.http.HttpStatus;
 

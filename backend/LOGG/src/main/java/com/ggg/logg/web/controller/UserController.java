@@ -1,11 +1,11 @@
-package com.ggg.logg.controller;
+package com.ggg.logg.web.controller;
 
 
-import com.ggg.logg.model.ApiResponse;
-import com.ggg.logg.model.dto.UserDto;
-import com.ggg.logg.model.request.user.UserLoginRequest;
-import com.ggg.logg.model.response.user.UserLoginResponse;
-import com.ggg.logg.service.UserService;
+import com.ggg.logg.web.response.ApiResponse;
+import com.ggg.logg.domain.user.User;
+import com.ggg.logg.web.request.user.UserLoginRequest;
+import com.ggg.logg.web.response.user.UserLoginResponse;
+import com.ggg.logg.application.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +26,10 @@ public class UserController {
   public ApiResponse<UserLoginResponse> loginByUserIdAndPassword(
       @RequestBody UserLoginRequest userLoginRequest) {
 
-    UserDto userDto = userService.loginByUserIdAndPassword(userLoginRequest.getUserId(),
+    User user = userService.loginByUserIdAndPassword(userLoginRequest.getUserId(),
         userLoginRequest.getUserPassword());
     return ApiResponse.of(HttpStatus.OK, "success",
-        UserLoginResponse.ofUserDto(userDto));
+        UserLoginResponse.ofUserDto(user));
   }
 
 }

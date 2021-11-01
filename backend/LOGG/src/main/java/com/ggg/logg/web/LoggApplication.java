@@ -1,4 +1,4 @@
-package com.ggg.logg;
+package com.ggg.logg.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
