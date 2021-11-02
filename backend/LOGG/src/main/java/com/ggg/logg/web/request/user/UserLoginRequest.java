@@ -1,4 +1,4 @@
-package com.ggg.logg.model.request.user;
+package com.ggg.logg.web.request.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

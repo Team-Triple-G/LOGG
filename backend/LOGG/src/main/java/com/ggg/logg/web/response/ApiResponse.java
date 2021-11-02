@@ -1,4 +1,4 @@
-package com.ggg.logg.model;
+package com.ggg.logg.web.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

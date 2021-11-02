@@ -1,6 +1,6 @@
-package com.ggg.logg.controller;
+package com.ggg.logg.web.controller;
 
-import com.ggg.logg.controller.MockMvcFilterConfig.MockMVcFilterConfig;
+import com.ggg.logg.web.controller.MockMvcFilterConfig.MockMVcFilterConfig;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

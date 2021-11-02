@@ -1,6 +1,12 @@
-package com.ggg.logg.model.exception.user;
+package com.ggg.logg.domain.user.exception;
 
 import org.springframework.http.HttpStatus;
+
+/**
+ * 비밀번호 입력 오류시 발생하는 예외
+ * author: cherrytomato1
+ * version: 1.0
+ */
 
 public class IllegalPasswordException extends RuntimeException {
 
