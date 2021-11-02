@@ -67,7 +67,7 @@ class UserControllerTest {
   @DisplayName("존재하지 않는 사용자 ID를 입력하면 404 응답을 보낸다.")
   public void invalidIdLoginFailureTest() throws Exception {
     //given
-    ResourceNotFoundException exceptedException = new UserNotFoundException(INVALID_EMAIL);
+    ResourceNotFoundException exceptedException = new UserNotFoundException("email", INVALID_EMAIL);
     given(this.userService.loginByUserEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";

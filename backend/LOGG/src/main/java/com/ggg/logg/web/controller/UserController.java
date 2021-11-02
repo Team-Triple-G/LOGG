@@ -28,7 +28,7 @@ public class UserController {
   public ApiResponse<UserLoginResponse> loginByUserIdAndPassword(
       @RequestBody UserLoginRequest userLoginRequest) {
 
-    User user = userService.loginByUserEmailAndPassword(userLoginRequest.getUserId(),
+    User user = userService.loginByUserEmailAndPassword(userLoginRequest.getEmail(),
         userLoginRequest.getUserPassword());
     return ApiResponse.of(HttpStatus.OK, "success",
         UserLoginResponse.ofUserDto(user));
