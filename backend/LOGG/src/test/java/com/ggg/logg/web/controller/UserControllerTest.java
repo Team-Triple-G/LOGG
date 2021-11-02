@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static com.ggg.logg.TestConstant.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ggg.logg.domain.user.exception.UserNotFoundException;
 import com.ggg.logg.web.response.ApiResponse;
 import com.ggg.logg.domain.common.ResourceNotFoundException;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
@@ -66,7 +67,7 @@ class UserControllerTest {
   @DisplayName("존재하지 않는 사용자 ID를 입력하면 404 응답을 보낸다.")
   public void invalidIdLoginFailureTest() throws Exception {
     //given
-    ResourceNotFoundException exceptedException = new ResourceNotFoundException("userId", "user",
+    ResourceNotFoundException exceptedException = new UserNotFoundException("userId", "user",
         INVALID_ID);
     given(this.userService.loginByUserIdAndPassword(INVALID_ID, TEST_PASSWORD))
         .willThrow(exceptedException);
@@ -88,7 +89,7 @@ class UserControllerTest {
   @DisplayName("올바르지 않은 비밀번호를 입력하면 404 응답을 보낸다.")
   public void invalidPasswordLoginFailureTest() throws Exception {
     //given
-    IllegalPasswordException exceptedException =  new IllegalPasswordException(TEST_ID, INVALID_PASSWORD);
+    RuntimeException exceptedException =  new IllegalPasswordException(TEST_ID, INVALID_PASSWORD);
     given(this.userService.loginByUserIdAndPassword(TEST_ID, INVALID_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";
