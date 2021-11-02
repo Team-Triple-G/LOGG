@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * user의 JPA 전용 엔티티
- *
- * author: cherrytomato1
- * version: 1.0.0
+ * <p>
+ * author: cherrytomato1 version: 1.0.0
  */
 
 @Entity(name = "user")
@@ -21,8 +20,19 @@ import lombok.NoArgsConstructor;
 public class UserEntity extends BaseEntity {
 
   @Column(nullable = false)
-  String email;
+  private String email;
   @Column(nullable = false)
-  String nickname;
-  String description;
+  private String nickname;
+  private String description;
+
+  public UserEntity(User user) {
+    this.email = user.getEmail();
+    this.nickname = user.getUserDetail().getNickname();
+    this.description = user.getUserDetail().getDescription();
+  }
+
+  public User toUser() {
+    return User.builder().email(this.email).userDetail(
+        UserDetail.builder().nickname(this.nickname).description(this.description).build()).build();
+  }
 }

@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDetail {
-  String nickname;
-  String description;
+  private String nickname;
+  private String description;
 }

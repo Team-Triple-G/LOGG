@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * User aggregate 루트 도메인
- *
- * author: cherrytomato1
- * version: 1.0.0
+ * <p>
+ * author: cherrytomato1 version: 1.0.0
  */
 
 @DomainModel
@@ -19,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-  String email;
-  UserDetail userDetail;
+
+  private String email;
+  private UserDetail userDetail;
 }
