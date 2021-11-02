@@ -5,12 +5,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * User aggregate 중 상세 정보
+ *
+ * author: cherrytomato1
+ * version: 1.0.0
+ */
+
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDetail {
-  String userNickname;
-  String email;
-  String description;
+  private String nickname;
+  private String description;
 }

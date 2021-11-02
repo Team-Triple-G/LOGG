@@ -8,17 +8,18 @@ import org.springframework.http.HttpStatus;
  * author: cherrytomato1
  * version: 1.0
  */
+
 public class ResourceNotFoundException extends RuntimeException {
 
   public static final HttpStatus responseStatus = HttpStatus.NOT_FOUND;
-  String resourceName;
-  String key;
-  Object value;
+  String keyName;
+  Object resource;
+  String keyValue;
 
-  public ResourceNotFoundException(String resourceName, String key, Object value) {
-    super(String.format("%s not found with %s : %s", resourceName, key, value));
-    this.key = key;
-    this.resourceName = resourceName;
-    this.value = value;
+  public ResourceNotFoundException(String keyName, Object resource, String keyValue) {
+    super(String.format("%s not found with %s : %s", keyName, resource, keyValue));
+    this.resource = resource;
+    this.keyName = keyName;
+    this.keyValue = keyName;
   }
 }

@@ -9,8 +9,8 @@ public class UserLoginResponse {
   String userNickname;
 
   public UserLoginResponse(User user) {
-    this.userId = user.getUserId();
-    this.userNickname = user.getUserDetail().getUserNickname();
+    this.userId = user.getEmail();
+    this.userNickname = user.getUserDetail().getNickname();
   }
 
   public static UserLoginResponse ofUserDto(User user) {

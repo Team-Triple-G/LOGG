@@ -6,6 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * User aggregate 루트 도메인
+ * <p>
+ * author: cherrytomato1 version: 1.0.0
+ */
 
 @DomainModel
 @Getter
@@ -13,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-  String userId;
-  UserDetail userDetail;
+
+  private String email;
+  private UserDetail userDetail;
 }

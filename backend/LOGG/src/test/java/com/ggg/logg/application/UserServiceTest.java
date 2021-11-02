@@ -26,11 +26,11 @@ class UserServiceTest {
     //given
 
     //when
-    User user = userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD);
+    User user = userService.loginByUserEmailAndPassword(TEST_EMAIL, TEST_PASSWORD);
 
     //then
     assertNotNull(user);
-    assertEquals(user.getUserDetail().getUserNickname(), TEST_NICKNAME);
+    assertEquals(user.getUserDetail().getNickname(), TEST_NICKNAME);
   }
 
   @Test
@@ -41,7 +41,7 @@ class UserServiceTest {
     //when
     User idFailureUser = null;
     try {
-      idFailureUser = userService.loginByUserIdAndPassword(INVALID_ID, TEST_PASSWORD);
+      idFailureUser = userService.loginByUserEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
@@ -57,7 +57,7 @@ class UserServiceTest {
     //when
     User passwordFailureResultUser = null;
     try {
-      passwordFailureResultUser = userService.loginByUserIdAndPassword(TEST_ID,
+      passwordFailureResultUser = userService.loginByUserEmailAndPassword(TEST_EMAIL,
           INVALID_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
