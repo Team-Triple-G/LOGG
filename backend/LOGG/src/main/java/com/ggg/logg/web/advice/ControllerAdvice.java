@@ -1,8 +1,8 @@
-package com.ggg.logg.util;
+package com.ggg.logg.web.advice;
 
-import com.ggg.logg.model.ApiResponse;
-import com.ggg.logg.model.exception.ResourceNotFoundException;
-import com.ggg.logg.model.exception.user.IllegalPasswordException;
+import com.ggg.logg.web.response.ApiResponse;
+import com.ggg.logg.domain.common.ResourceNotFoundException;
+import com.ggg.logg.domain.user.exception.IllegalPasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

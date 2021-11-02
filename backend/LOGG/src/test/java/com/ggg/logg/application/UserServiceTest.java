@@ -1,10 +1,13 @@
-package com.ggg.logg.service;
+package com.ggg.logg.application;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.ggg.logg.TestConstant.*;
 
-import com.ggg.logg.model.dto.UserDto;
-import com.ggg.logg.model.exception.user.IllegalPasswordException;
-import com.ggg.logg.model.exception.ResourceNotFoundException;
+import com.ggg.logg.application.user.UserService;
+import com.ggg.logg.application.user.UserServiceImpl;
+import com.ggg.logg.domain.user.User;
+import com.ggg.logg.domain.user.exception.IllegalPasswordException;
+import com.ggg.logg.domain.common.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +15,6 @@ import org.junit.jupiter.api.Test;
 class UserServiceTest {
 
   UserService userService;
-
-  final String TEST_ID = "GGG";
-  final String TEST_PASSWORD = "gurogarbageguys";
-  final String TEST_NICKNAME = "쓰레기맨";
-
   @BeforeEach
   public void setUp() {
     userService = new UserServiceImpl();
@@ -28,11 +26,11 @@ class UserServiceTest {
     //given
 
     //when
-    UserDto userDto = userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD);
+    User user = userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD);
 
     //then
-    assertNotNull(userDto);
-    assertEquals(userDto.getUserNickname(), TEST_NICKNAME);
+    assertNotNull(user);
+    assertEquals(user.getUserDetail().getUserNickname(), TEST_NICKNAME);
   }
 
   @Test
@@ -40,17 +38,15 @@ class UserServiceTest {
   public void invalidIdLoginTest() {
     //given
 
-    final String WRONG_ID = "GGg";
-
     //when
-    UserDto idFailureUserDto = null;
+    User idFailureUser = null;
     try {
-      idFailureUserDto = userService.loginByUserIdAndPassword(WRONG_ID, TEST_PASSWORD);
+      idFailureUser = userService.loginByUserIdAndPassword(INVALID_ID, TEST_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
     //then
-    assertNull(idFailureUserDto);
+    assertNull(idFailureUser);
   }
 
   @Test
@@ -58,17 +54,15 @@ class UserServiceTest {
   public void invalidPasswordLoginTest() {
     //given
 
-    final String WRONG_PASSWORD = "gurogarbageguy";
-
     //when
-    UserDto passwordFailureResultUserDto = null;
+    User passwordFailureResultUser = null;
     try {
-      passwordFailureResultUserDto = userService.loginByUserIdAndPassword(TEST_ID,
-          WRONG_PASSWORD);
+      passwordFailureResultUser = userService.loginByUserIdAndPassword(TEST_ID,
+          INVALID_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
     //then
-    assertNull(passwordFailureResultUserDto);
+    assertNull(passwordFailureResultUser);
   }
 }
