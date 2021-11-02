@@ -6,7 +6,7 @@ import com.ggg.logg.domain.user.UserEntity;
 public class UserNotFoundException extends ResourceNotFoundException {
 
   public UserNotFoundException(String userId) {
-    super("userId", UserEntity.class, userId);
+    super("email", UserEntity.class, userId);
 
   }
 }

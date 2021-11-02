@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
  * author: cherrytomato1
  * version: 1.0
  */
+
 public class ResourceNotFoundException extends RuntimeException {
 
   public static final HttpStatus responseStatus = HttpStatus.NOT_FOUND;

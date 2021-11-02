@@ -25,7 +25,7 @@ class UserRepositoryTest {
   @DisplayName("유저 아이디와 비밀번호가 입력되면 데이터 베이스에 저장된다.")
   public void createUserByUserEntity(){
     //given
-    UserEntity userEntity = new UserEntity();
+    UserEntity userEntity = UserEntity.builder().nickname(TEST_NICKNAME).build();
 
     //when
     UserEntity resultUserEntity = userRepository.save(userEntity);
@@ -35,13 +35,13 @@ class UserRepositoryTest {
   }
 
   @Test
-  @DisplayName("유저 아이디로 사용자를 가져온다")
+  @DisplayName("유저 이메일로 사용자를 가져온다")
   public void loadUserByUserId() {
     //given
 
     //when
     UserEntity userEntity =
-        userRepository.findById(TEST_ID).orElseThrow(() -> new UserNotFoundException(TEST_ID));
+        userRepository.findById(TEST_EMAIL).orElseThrow(() -> new UserNotFoundException(TEST_EMAIL));
 
     //then
     assertNotNull(userEntity);

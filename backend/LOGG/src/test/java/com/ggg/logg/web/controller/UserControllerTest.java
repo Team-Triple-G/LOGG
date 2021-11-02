@@ -45,14 +45,14 @@ class UserControllerTest {
   }
 
   @Test
-  @DisplayName("존재하는 사용자 ID와 비밀번호를 입력하면 200의 응답을 받는다")
+  @DisplayName("존재하는 사용자 Email와 비밀번호를 입력하면 200의 응답을 받는다")
   public void loginSuccessTest() throws Exception {
     //given
-    given(this.userService.loginByUserIdAndPassword(TEST_ID, TEST_PASSWORD)).willReturn(TEST_USER_DTO);
+    given(this.userService.loginByUserEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)).willReturn(TEST_USER_DTO);
     String uri = "/api/v1/user/login";
 
     //when
-    UserLoginRequest userLoginRequest = new UserLoginRequest(TEST_ID, TEST_PASSWORD);
+    UserLoginRequest userLoginRequest = new UserLoginRequest(TEST_EMAIL, TEST_PASSWORD);
     String content = objectMapper.writeValueAsString(userLoginRequest);
 
     ApiResponse<UserLoginResponse> response = ApiResponse.of(HttpStatus.OK, "success",
@@ -67,13 +67,13 @@ class UserControllerTest {
   @DisplayName("존재하지 않는 사용자 ID를 입력하면 404 응답을 보낸다.")
   public void invalidIdLoginFailureTest() throws Exception {
     //given
-    ResourceNotFoundException exceptedException = new UserNotFoundException(INVALID_ID);
-    given(this.userService.loginByUserIdAndPassword(INVALID_ID, TEST_PASSWORD))
+    ResourceNotFoundException exceptedException = new UserNotFoundException(INVALID_EMAIL);
+    given(this.userService.loginByUserEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";
 
     //when
-    UserLoginRequest userLoginRequest = new UserLoginRequest(INVALID_ID, TEST_PASSWORD);
+    UserLoginRequest userLoginRequest = new UserLoginRequest(INVALID_EMAIL, TEST_PASSWORD);
     String content = objectMapper.writeValueAsString(userLoginRequest);
 
     ApiResponse<?> response = ApiResponse.of(HttpStatus.NOT_FOUND, exceptedException.getMessage(),
@@ -88,13 +88,13 @@ class UserControllerTest {
   @DisplayName("올바르지 않은 비밀번호를 입력하면 404 응답을 보낸다.")
   public void invalidPasswordLoginFailureTest() throws Exception {
     //given
-    RuntimeException exceptedException =  new IllegalPasswordException(TEST_ID, INVALID_PASSWORD);
-    given(this.userService.loginByUserIdAndPassword(TEST_ID, INVALID_PASSWORD))
+    RuntimeException exceptedException =  new IllegalPasswordException(TEST_EMAIL, INVALID_PASSWORD);
+    given(this.userService.loginByUserEmailAndPassword(TEST_EMAIL, INVALID_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";
 
     //when
-    UserLoginRequest userLoginRequest = new UserLoginRequest(TEST_ID, INVALID_PASSWORD);
+    UserLoginRequest userLoginRequest = new UserLoginRequest(TEST_EMAIL, INVALID_PASSWORD);
     String content = objectMapper.writeValueAsString(userLoginRequest);
 
     ApiResponse<?> response = ApiResponse.of(HttpStatus.UNAUTHORIZED, exceptedException.getMessage(),

@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
-  private final String TEMP_USER_ID = "GGG";
+  private final String TEMP_USER_EMAIL = "ggg@ggg.com";
   private final String TEMP_USER_NICKNAME = "쓰레기맨";
   private final String TEMP_USER_PASSWORD = "gurogarbageguys";
 
   @Override
-  public User loginByUserIdAndPassword(String userId, String userPassword) {
-    if (!userId.equals(TEMP_USER_ID)) {
-      throw new UserNotFoundException(userId);
+  public User loginByUserEmailAndPassword(String userEmail, String userPassword) {
+    if (!userEmail.equals(TEMP_USER_EMAIL)) {
+      throw new UserNotFoundException(userEmail);
     }
     if (!userPassword.equals(TEMP_USER_PASSWORD)) {
-      throw new IllegalPasswordException(userId, userPassword);
+      throw new IllegalPasswordException(userEmail, userPassword);
     }
-    return User.builder().userId(userId).userDetail(UserDetail.builder()
-        .userNickname(TEMP_USER_NICKNAME).build()).build();
+    return User.builder().email(userEmail).userDetail(UserDetail.builder()
+        .nickname(TEMP_USER_NICKNAME).build()).build();
   }
 }
