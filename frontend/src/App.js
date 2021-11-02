@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
-import LoginForm from "./Components/LoginForm"
+import Index from "./Components/Index";
 
 function App() {
+  console.log("app init");
   return (
-    <LoginForm />
+    <Index />
   );
 }
 
