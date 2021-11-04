@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * user의 JPA 전용 엔티티
- * <p>
- * author: cherrytomato1 version: 1.0.0
+ *
+ * password 컬럼 추가
+ * author: cherrytomato1
+ * version: 1.0.1
  */
 
 @Entity(name = "user")
@@ -21,9 +23,15 @@ public class UserEntity extends BaseEntity {
 
   @Column(nullable = false)
   private String email;
+
   @Column(nullable = false)
   private String nickname;
+
+  @Column(nullable = false)
+  private String password;
+
   private String description;
+
 
   public UserEntity(User user) {
     this.email = user.getEmail();

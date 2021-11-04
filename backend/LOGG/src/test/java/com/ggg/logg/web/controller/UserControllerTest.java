@@ -26,6 +26,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+/**
+ * UserController 슬라이스 테스트
+ *
+ * author: cherrytomato1
+ * version: 1.0.0
+ */
+
+
 @MockMvcFilterConfig
 @WebMvcTest(UserController.class)
 class UserControllerTest {
