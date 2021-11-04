@@ -1,10 +1,8 @@
 package com.ggg.logg.application.user;
 
 import com.ggg.logg.domain.user.User;
-import com.ggg.logg.domain.user.UserDetail;
 import com.ggg.logg.domain.user.UserEntity;
-import com.ggg.logg.domain.user.UserRepository;
-import com.ggg.logg.domain.user.exception.IllegalPasswordException;
+import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-  private final UserRepository userRepository;
+  private final UserRepository<UserEntity, String> userRepository;
 
   @Override
   public User loginByEmailAndPassword(String email, String password) {
