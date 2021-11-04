@@ -31,7 +31,7 @@ class UserServiceTest {
 
   @BeforeEach
   public void setUp() {
-    this.userService = new UserServiceImpl();
+    this.userService = new UserServiceImpl(userRepository);
   }
 
   @Test
@@ -44,6 +44,7 @@ class UserServiceTest {
             .of(UserEntity.builder()
                 .email(TEST_EMAIL)
                 .nickname(TEST_NICKNAME)
+                .password(TEST_PASSWORD)
                 .build()));
 
     //when
@@ -83,6 +84,7 @@ class UserServiceTest {
             .of(UserEntity.builder()
                 .email(TEST_EMAIL)
                 .nickname(TEST_NICKNAME)
+                .password(TEST_PASSWORD)
                 .build()));
 
     //when

@@ -32,7 +32,6 @@ public class UserEntity extends BaseEntity {
 
   private String description;
 
-
   public UserEntity(User user) {
     this.email = user.getEmail();
     this.nickname = user.getUserDetail().getNickname();
@@ -40,7 +39,7 @@ public class UserEntity extends BaseEntity {
   }
 
   public User toUser() {
-    return User.builder().email(this.email).userDetail(
+    return User.builder().email(this.email).password(this.password).userDetail(
         UserDetail.builder().nickname(this.nickname).description(this.description).build()).build();
   }
 }
