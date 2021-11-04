@@ -14,12 +14,12 @@ public class UserServiceImpl implements UserService {
   private final String TEMP_USER_PASSWORD = "gurogarbageguys";
 
   @Override
-  public User loginByUserEmailAndPassword(String email, String userPassword) {
+  public User loginByEmailAndPassword(String email, String password) {
     if (!email.equals(TEMP_USER_EMAIL)) {
       throw new UserNotFoundException("email", email);
     }
-    if (!userPassword.equals(TEMP_USER_PASSWORD)) {
-      throw new IllegalPasswordException(email, userPassword);
+    if (!password.equals(TEMP_USER_PASSWORD)) {
+      throw new IllegalPasswordException(email, password);
     }
     return User.builder().email(email).userDetail(UserDetail.builder()
         .nickname(TEMP_USER_NICKNAME).build()).build();

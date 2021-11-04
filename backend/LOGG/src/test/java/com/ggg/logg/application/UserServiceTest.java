@@ -26,7 +26,7 @@ class UserServiceTest {
     //given
 
     //when
-    User user = userService.loginByUserEmailAndPassword(TEST_EMAIL, TEST_PASSWORD);
+    User user = userService.loginByEmailAndPassword(TEST_EMAIL, TEST_PASSWORD);
 
     //then
     assertNotNull(user);
@@ -41,7 +41,7 @@ class UserServiceTest {
     //when
     User idFailureUser = null;
     try {
-      idFailureUser = userService.loginByUserEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD);
+      idFailureUser = userService.loginByEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }
 
@@ -57,7 +57,7 @@ class UserServiceTest {
     //when
     User passwordFailureResultUser = null;
     try {
-      passwordFailureResultUser = userService.loginByUserEmailAndPassword(TEST_EMAIL,
+      passwordFailureResultUser = userService.loginByEmailAndPassword(TEST_EMAIL,
           INVALID_PASSWORD);
     } catch (ResourceNotFoundException | IllegalPasswordException ignored) {
     }

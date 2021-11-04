@@ -25,11 +25,11 @@ public class UserController {
 
   @PostMapping("/login")
   @ResponseStatus(value = HttpStatus.OK)
-  public ApiResponse<UserLoginResponse> loginByUserIdAndPassword(
+  public ApiResponse<UserLoginResponse> loginByEmailAndPassword(
       @RequestBody UserLoginRequest userLoginRequest) {
 
-    User user = userService.loginByUserEmailAndPassword(userLoginRequest.getEmail(),
-        userLoginRequest.getUserPassword());
+    User user = userService.loginByEmailAndPassword(userLoginRequest.getEmail(),
+        userLoginRequest.getPassword());
     return ApiResponse.of(HttpStatus.OK, "success",
         UserLoginResponse.ofUserDto(user));
   }

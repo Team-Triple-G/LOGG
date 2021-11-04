@@ -48,7 +48,7 @@ class UserControllerTest {
   @DisplayName("존재하는 사용자 Email와 비밀번호를 입력하면 200의 응답을 받는다")
   public void loginSuccessTest() throws Exception {
     //given
-    given(this.userService.loginByUserEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)).willReturn(TEST_USER_DTO);
+    given(this.userService.loginByEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)).willReturn(TEST_USER_DTO);
     String uri = "/api/v1/user/login";
 
     //when
@@ -68,7 +68,7 @@ class UserControllerTest {
   public void invalidIdLoginFailureTest() throws Exception {
     //given
     ResourceNotFoundException exceptedException = new UserNotFoundException("email", INVALID_EMAIL);
-    given(this.userService.loginByUserEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD))
+    given(this.userService.loginByEmailAndPassword(INVALID_EMAIL, TEST_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";
 
@@ -89,7 +89,7 @@ class UserControllerTest {
   public void invalidPasswordLoginFailureTest() throws Exception {
     //given
     RuntimeException exceptedException =  new IllegalPasswordException(TEST_EMAIL, INVALID_PASSWORD);
-    given(this.userService.loginByUserEmailAndPassword(TEST_EMAIL, INVALID_PASSWORD))
+    given(this.userService.loginByEmailAndPassword(TEST_EMAIL, INVALID_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";
 
