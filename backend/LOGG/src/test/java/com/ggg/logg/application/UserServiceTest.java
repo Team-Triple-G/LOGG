@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.given;
 import com.ggg.logg.application.user.UserService;
 import com.ggg.logg.application.user.UserServiceImpl;
 import com.ggg.logg.domain.user.User;
+import com.ggg.logg.domain.user.UserDetail;
 import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
@@ -97,5 +98,22 @@ class UserServiceTest {
 
     //then
     assertNull(passwordFailureResultUser);
+  }
+
+
+  @Test
+  @DisplayName("회원 가입 정보가 입력되면 사용자를 리포지토리에 저장한다.")
+  public void testRegisterUser() {
+    //given
+    UserEntity testUserEntity = new UserEntity(TEST_USER_DTO);
+    given(this.userRepository.save(testUserEntity)).willReturn(testUserEntity);
+
+    //when
+    User resultUser = userService.registerUser(TEST_USER_DTO);
+
+
+    //then
+    assertNotNull(resultUser);
+    assertEquals(TEST_USER_DTO, resultUser);
   }
 }

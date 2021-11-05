@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService {
             "email", email)).toUser().verifyPasswordAndReturnUser(password);
 
   }
+
+  @Override
+  public User registerUser(User user) {
+
+    return userRepository.save(new UserEntity(user)).toUser();
+  }
 }

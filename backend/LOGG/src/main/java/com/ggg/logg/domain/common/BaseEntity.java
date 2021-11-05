@@ -18,11 +18,11 @@ public abstract class BaseEntity {
       + ".HashIdGenerator")
   @GeneratedValue(generator = "HashIdGenerator")
   @Id
-  private String id;
+  protected String id;
 
   @CreatedDate
-  private LocalDateTime createdDate;
+  protected LocalDateTime createdDate;
 
   @LastModifiedDate
-  private LocalDateTime lastModifiedDate;
+  protected LocalDateTime lastModifiedDate;
 }

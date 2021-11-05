@@ -26,6 +26,7 @@ import lombok.ToString;
 @ToString
 public class User {
 
+  private String id;
   private String email;
   private String password;
   private UserDetail userDetail;
@@ -35,5 +36,14 @@ public class User {
       return this;
     }
     throw new IllegalPasswordException(this.email, this.password);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof User)) {
+      return false;
+    }
+
+    return ((User)o).getId().equals(this.id);
   }
 }

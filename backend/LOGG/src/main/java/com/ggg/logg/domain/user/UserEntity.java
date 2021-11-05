@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * user의 JPA 전용 엔티티
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class UserEntity extends BaseEntity {
 
   @Column(nullable = false)
@@ -37,10 +39,14 @@ public class UserEntity extends BaseEntity {
     this.nickname = user.getUserDetail().getNickname();
     this.description = user.getUserDetail().getDescription();
     this.password = user.getPassword();
+    if (user.getId() == null || user.getId().length() == 0) {
+      return;
+    }
+    this.id = user.getId();
   }
 
   public User toUser() {
-    return User.builder().email(this.email).password(this.password).userDetail(
+    return User.builder().id(this.id).email(this.email).password(this.password).userDetail(
         UserDetail.builder().nickname(this.nickname).description(this.description).build()).build();
   }
 }

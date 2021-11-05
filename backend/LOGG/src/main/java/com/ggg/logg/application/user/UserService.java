@@ -7,4 +7,6 @@ import com.ggg.logg.domain.user.User;
 public interface UserService extends ApplicationService {
 
   User loginByEmailAndPassword(String email, String password);
+
+  User registerUser(User user);
 }
