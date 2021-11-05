@@ -76,9 +76,30 @@ jacocoTestReport {
 //  html.destination file("$buildDir/jacocoHtml")
 //  xml.destination file("$buildDir/jacoco.xml")
     }
+
+    def Qdomains = []
+    for(qPattern in "**/QA" .. "**/QZ"){
+        Qdomains.add(qPattern+"*")
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [] + Qdomains)
+        }))
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
+
+    // Q + 대문자로 시작하는 클래스 exclude (QueryDSL q 클래스)
+    def Qdomains = []
+    for (qPattern in "*.QA".."*.QZ") {
+        Qdomains.add(qPattern + "*")
+    }
+
     violationRules {
         rule {
             element = 'CLASS'
@@ -88,6 +109,8 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 0.75
             }
+
+            excludes = [] + Qdomains
         }
     }
 }

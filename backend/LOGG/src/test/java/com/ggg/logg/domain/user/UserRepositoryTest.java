@@ -23,7 +23,6 @@ class UserRepositoryTest {
   @Autowired
   UserRepository userRepository;
 
-
   @Test
   @DisplayName("유저 아이디와 비밀번호가 입력되면 데이터 베이스에 저장된다.")
   public void createUserByUserEntity(){
@@ -44,9 +43,9 @@ class UserRepositoryTest {
     //given
 
     //when
-    UserEntity userEntity =
+    User userEntity =
         userRepository.findByEmail(TEST_EMAIL).orElseThrow(() -> new UserNotFoundException(
-            "email", TEST_EMAIL));
+            "email", TEST_EMAIL)).toUser();
 
     //then
     assertNotNull(userEntity);
