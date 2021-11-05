@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "4.4.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -6,7 +12,7 @@ plugins {
 }
 
 group = 'com.ggg.logg'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -41,6 +47,13 @@ dependencies {
     //spring data jpa
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 
+
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
 }
 
 jacoco {
@@ -54,12 +67,12 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        // 원하는 리포트를 켜고 끌 수 있습니다.
+        // 원하는 리포트를 켜고 끄기
         html.enabled true
         xml.enabled false
         csv.enabled false
 
-//  각 리포트 타입 마다 리포트 저장 경로를 설정할 수 있습니다.
+//  각 리포트 타입 마다 리포트 저장 경로를 설정
 //  html.destination file("$buildDir/jacocoHtml")
 //  xml.destination file("$buildDir/jacoco.xml")
     }
@@ -75,6 +88,15 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 0.75
             }
+        }
+    }
+}
+
+//q클래스 디렉토리 위치
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
         }
     }
 }

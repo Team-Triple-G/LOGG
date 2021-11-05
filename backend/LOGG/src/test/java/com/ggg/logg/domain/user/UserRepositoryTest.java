@@ -19,8 +19,10 @@ import static com.ggg.logg.TestConstant.*;
  */
 @SpringBootTest
 class UserRepositoryTest {
+
   @Autowired
-  UserRepository<UserEntity, String> userRepository;
+  UserRepository userRepository;
+
 
   @Test
   @DisplayName("유저 아이디와 비밀번호가 입력되면 데이터 베이스에 저장된다.")
@@ -51,17 +53,16 @@ class UserRepositoryTest {
   }
 
   @Test
-  @DisplayName("커스텀 쿼리 리포지토리의 의존성을 테스트한다")
+  @DisplayName("사용자 이메일로 비밀번호를 받아온다.")
   public void testCustomQueryUserRepositoryDependency() {
     //ginen
 
     //when
-    String result = userRepository.findPasswordByEmail(TEST_EMAIL);
+    System.out.println(TEST_EMAIL);
+    Object result = userRepository.findPasswordByEmail(TEST_EMAIL);
 
     //then
     assertEquals(TEST_PASSWORD, result);
-//    assertNull(result);
-
   }
 
 }

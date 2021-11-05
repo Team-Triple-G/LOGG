@@ -9,7 +9,8 @@ import java.util.Optional;
  * author: cherrytomato1
  * version: 1.0.0
  */
-public interface UserRepository<T, ID> extends CustomQueryUserRepository<T, ID>{
+//@NoRepositoryBean
+public interface UserRepository extends CustomizedUserRepository {
   Optional<UserEntity> findByEmail(String email);
-  <S extends T> S save(S entity);
+  <S extends UserEntity> S save(S entity);
 }

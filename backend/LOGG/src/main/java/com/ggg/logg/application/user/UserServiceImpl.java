@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-  private final UserRepository<UserEntity, String> userRepository;
+  private final UserRepository userRepository;
 
   @Override
   public User loginByEmailAndPassword(String email, String password) {
     return
         userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(
             "email", email)).toUser().verifyPasswordAndReturnUser(password);
+
   }
 }
