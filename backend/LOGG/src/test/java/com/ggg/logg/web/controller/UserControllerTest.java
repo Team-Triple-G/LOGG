@@ -33,9 +33,9 @@ import org.springframework.util.MultiValueMap;
 /**
  * UserController 슬라이스 테스트
  * <p>
- * 이메일, 닉네임 중복체크 테스트
+ * 회원가입 컨트롤러 테스트
  * <p>
- * author: cherrytomato1 version: 1.0.1
+ * author: cherrytomato1 version: 1.0.2
  */
 
 
@@ -174,6 +174,25 @@ class UserControllerTest {
     //then
     mockMvcGetAssert(uri, duplicateParams, duplicateExceptedResultString, status().isConflict());
     mockMvcGetAssert(uri, successParams, successExceptedResultString, status().isOk());
+  }
+
+  @Test
+  @DisplayName("회원가입 컨트롤러를 테스트한다")
+  public void registerUserControllerTest() throws Exception {
+    given(this.userService.registerUser(TEST_USER_DTO)).willReturn(TEST_USER_DTO);
+    String uri = "api/v1/user/register";
+
+    UserRegisterRequest userRegisterRequest =
+        UserRegisterRequest.builder().email(TEST_EMAIL).nickname(TEST_NICKNAME).password(TEST_PASSWORD).build();
+
+    //when
+    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.CREATED, "success", TEST_EMAIL);
+    String successExceptedResultString = objectMapper.writeValueAsString(successResponse);
+    String content = objectMapper.writeValueAsString(userRegisterRequest);
+
+    //then
+    mockMvcPostAssert(uri, content, successExceptedResultString, status().isCreated());
+
   }
 
   private void mockMvcPostAssert(String uri, String content, String exceptedResultString,
