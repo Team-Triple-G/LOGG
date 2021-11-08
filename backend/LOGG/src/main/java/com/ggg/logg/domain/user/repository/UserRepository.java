@@ -9,7 +9,7 @@ import java.util.Optional;
  * author: cherrytomato1
  * version: 1.0.0
  */
-//@NoRepositoryBean
+
 public interface UserRepository extends CustomizedUserRepository {
   Optional<UserEntity> findByEmail(String email);
   <S extends UserEntity> S save(S entity);

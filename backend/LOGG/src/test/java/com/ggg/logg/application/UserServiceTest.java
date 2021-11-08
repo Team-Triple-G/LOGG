@@ -7,7 +7,7 @@ import static org.mockito.BDDMockito.given;
 import com.ggg.logg.application.user.UserService;
 import com.ggg.logg.application.user.UserServiceImpl;
 import com.ggg.logg.domain.user.User;
-import com.ggg.logg.domain.user.UserDetail;
+
 import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
@@ -19,6 +19,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -29,6 +31,8 @@ class UserServiceTest {
   UserRepository userRepository;
 
   private UserService userService;
+
+  private final Logger LOGGER = LoggerFactory.getLogger(UserServiceTest.class);
 
   @BeforeEach
   public void setUp() {
@@ -105,9 +109,11 @@ class UserServiceTest {
   @DisplayName("회원 가입 정보가 입력되면 사용자를 리포지토리에 저장한다.")
   public void testRegisterUser() {
     //given
-    UserEntity testUserEntity = new UserEntity(TEST_USER_DTO);
+    UserEntity testUserEntity = UserEntity.ofUser(TEST_USER_DTO);
     given(this.userRepository.save(testUserEntity)).willReturn(testUserEntity);
 
+    LOGGER.info("test user dto - {}", TEST_USER_DTO);
+    LOGGER.info("test user entity - {}", testUserEntity);
     //when
     User resultUser = userService.registerUser(TEST_USER_DTO);
 

@@ -5,11 +5,14 @@ import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
  * user 도메인의 서비스
  */
+
+@Slf4j
 @Service("UserService")
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -27,6 +30,6 @@ public class UserServiceImpl implements UserService {
   @Override
   public User registerUser(User user) {
 
-    return userRepository.save(new UserEntity(user)).toUser();
+    return userRepository.save(UserEntity.ofUser(user)).toUser();
   }
 }

@@ -12,10 +12,10 @@ import lombok.ToString;
  * User aggregate 루트 도메인
  * <p>
  *
- * password 추가
+ * equals override
  *
  * author: cherrytomato1
- * version: 1.0.1
+ * version: 1.0.2
  */
 
 @DomainModel
@@ -44,6 +44,14 @@ public class User {
       return false;
     }
 
-    return ((User)o).getId().equals(this.id);
+    User user = (User) o;
+    if (this.id != null && user.getId() != null && this.id.equals(user.getId())) {
+      return true;
+    }
+    try {
+      return this.email.equals(user.getEmail());
+    } catch (NullPointerException ne) {
+      return false;
+    }
   }
 }
