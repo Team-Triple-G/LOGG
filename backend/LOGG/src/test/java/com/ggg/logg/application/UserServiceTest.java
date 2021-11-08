@@ -144,12 +144,13 @@ class UserServiceTest {
   public void checkDuplicateNicknameTest() {
     //given
     UserEntity testUserEntity = UserEntity.ofUser(TEST_USER_DTO);
-    given(this.userRepository.findByNickname(TEST_NICKNAME)).willReturn(Optional.of(testUserEntity));
+    given(this.userRepository.findByNickname(TEST_NICKNAME))
+        .willReturn(Optional.of(testUserEntity));
     given(this.userRepository.findByNickname(INVALID_NICKNAME)).willReturn(Optional.empty());
 
     //when
-    boolean failureResult = userService.isDuplicateNickname(TEST_NICKNAME);
-    boolean successResult = userService.isDuplicateNickname(INVALID_NICKNAME);
+    boolean successResult = userService.isDuplicateNickname(TEST_NICKNAME);
+    boolean failureResult = userService.isDuplicateNickname(INVALID_NICKNAME);
 
     //then
     assertFalse(failureResult);

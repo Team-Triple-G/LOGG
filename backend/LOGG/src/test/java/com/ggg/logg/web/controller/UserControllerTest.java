@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static com.ggg.logg.TestConstant.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
 import com.ggg.logg.web.response.ApiResponse;
 import com.ggg.logg.domain.common.ResourceNotFoundException;
@@ -31,12 +32,10 @@ import org.springframework.util.MultiValueMap;
 
 /**
  * UserController 슬라이스 테스트
- *
+ * <p>
  * 이메일, 닉네임 중복체크 테스트
- *
- * author: cherrytomato1
- * version: 1.0.1
- *
+ * <p>
+ * author: cherrytomato1 version: 1.0.1
  */
 
 
@@ -61,7 +60,8 @@ class UserControllerTest {
   @DisplayName("존재하는 사용자 Email와 비밀번호를 입력하면 200의 응답을 받는다")
   public void loginSuccessTest() throws Exception {
     //given
-    given(this.userService.loginByEmailAndPassword(TEST_EMAIL, TEST_PASSWORD)).willReturn(TEST_USER_DTO);
+    given(this.userService.loginByEmailAndPassword(TEST_EMAIL, TEST_PASSWORD))
+        .willReturn(TEST_USER_DTO);
     String uri = "/api/v1/user/login";
 
     //when
@@ -101,7 +101,7 @@ class UserControllerTest {
   @DisplayName("올바르지 않은 비밀번호를 입력하면 404 응답을 보낸다.")
   public void invalidPasswordLoginFailureTest() throws Exception {
     //given
-    RuntimeException exceptedException =  new IllegalPasswordException(TEST_EMAIL, INVALID_PASSWORD);
+    RuntimeException exceptedException = new IllegalPasswordException(TEST_EMAIL, INVALID_PASSWORD);
     given(this.userService.loginByEmailAndPassword(TEST_EMAIL, INVALID_PASSWORD))
         .willThrow(exceptedException);
     String uri = "/api/v1/user/login";
@@ -110,8 +110,9 @@ class UserControllerTest {
     UserLoginRequest userLoginRequest = new UserLoginRequest(TEST_EMAIL, INVALID_PASSWORD);
     String content = objectMapper.writeValueAsString(userLoginRequest);
 
-    ApiResponse<?> response = ApiResponse.of(HttpStatus.UNAUTHORIZED, exceptedException.getMessage(),
-        null);
+    ApiResponse<?> response = ApiResponse
+        .of(HttpStatus.UNAUTHORIZED, exceptedException.getMessage(),
+            null);
     String exceptedResultString = objectMapper.writeValueAsString(response);
 
     //then
@@ -125,11 +126,13 @@ class UserControllerTest {
     given(this.userService.isDuplicateEmail(TEST_EMAIL)).willReturn(true);
     given(this.userService.isDuplicateEmail(INVALID_EMAIL)).willReturn(false);
     String uri = "/api/v1/user/check-email";
+    DuplicatedException exceptedException = new DuplicatedException("email", TEST_EMAIL);
 
     //when
-    ApiResponse<?> duplicateResponse = ApiResponse.of(HttpStatus.CONFLICT, String.format("%s is already "
-        + "used", TEST_EMAIL), TEST_EMAIL);
-    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.OK, "success", TEST_EMAIL);
+    ApiResponse<?> duplicateResponse = ApiResponse
+        .of(HttpStatus.CONFLICT, exceptedException.getMessage(),
+            exceptedException.getValue());
+    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.OK, "success", INVALID_EMAIL);
     String duplicateExceptedResultString = objectMapper.writeValueAsString(duplicateResponse);
     String successExceptedResultString = objectMapper.writeValueAsString(successResponse);
 
@@ -151,11 +154,14 @@ class UserControllerTest {
     given(this.userService.isDuplicateNickname(TEST_NICKNAME)).willReturn(true);
     given(this.userService.isDuplicateNickname(INVALID_NICKNAME)).willReturn(false);
     String uri = "/api/v1/user/check-nickname";
+    DuplicatedException exceptedException = new DuplicatedException("nickname", TEST_NICKNAME);
 
     //when
-    ApiResponse<?> duplicateResponse = ApiResponse.of(HttpStatus.CONFLICT, String.format("%s is already "
-        + "used", TEST_NICKNAME), TEST_NICKNAME);
-    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.OK, "success", TEST_NICKNAME);
+    ApiResponse<?> duplicateResponse = ApiResponse
+        .of(HttpStatus.CONFLICT, exceptedException.getMessage(),
+            exceptedException.getValue());
+
+    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.OK, "success", INVALID_NICKNAME);
     String duplicateExceptedResultString = objectMapper.writeValueAsString(duplicateResponse);
     String successExceptedResultString = objectMapper.writeValueAsString(successResponse);
 
