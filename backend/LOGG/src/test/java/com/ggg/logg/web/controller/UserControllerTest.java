@@ -11,6 +11,7 @@ import static com.ggg.logg.TestConstant.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
+import com.ggg.logg.web.request.user.UserRegisterRequest;
 import com.ggg.logg.web.response.ApiResponse;
 import com.ggg.logg.domain.common.ResourceNotFoundException;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
@@ -180,7 +181,7 @@ class UserControllerTest {
   @DisplayName("회원가입 컨트롤러를 테스트한다")
   public void registerUserControllerTest() throws Exception {
     given(this.userService.registerUser(TEST_USER_DTO)).willReturn(TEST_USER_DTO);
-    String uri = "api/v1/user/register";
+    String uri = "/api/v1/user/register";
 
     UserRegisterRequest userRegisterRequest =
         UserRegisterRequest.builder().email(TEST_EMAIL).nickname(TEST_NICKNAME).password(TEST_PASSWORD).build();
