@@ -1,27 +1,52 @@
 package com.ggg.logg.application.user;
 
+import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.User;
-import com.ggg.logg.domain.user.UserDetail;
-import com.ggg.logg.domain.user.exception.IllegalPasswordException;
+import com.ggg.logg.domain.user.UserEntity;
+import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+/**
+ * user 도메인의 서비스
+ */
+
+@Slf4j
 @Service("UserService")
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-  private final String TEMP_USER_EMAIL = "ggg@ggg.com";
-  private final String TEMP_USER_NICKNAME = "쓰레기맨";
-  private final String TEMP_USER_PASSWORD = "gurogarbageguys";
+  private final UserRepository userRepository;
 
   @Override
-  public User loginByUserEmailAndPassword(String email, String userPassword) {
-    if (!email.equals(TEMP_USER_EMAIL)) {
-      throw new UserNotFoundException("email", email);
+  public User loginByEmailAndPassword(String email, String password) {
+    return
+        userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(
+            "email", email)).toUser().verifyPasswordAndReturnUser(password);
+
+  }
+
+  @Override
+  public User registerUser(User user) {
+    if (isDuplicateEmail(user.getEmail())) {
+      throw new DuplicatedException("email", user.getEmail());
     }
-    if (!userPassword.equals(TEMP_USER_PASSWORD)) {
-      throw new IllegalPasswordException(email, userPassword);
+    if (isDuplicateNickname(user.getUserDetail().getNickname())) {
+      throw new DuplicatedException("nickname", user.getUserDetail().getNickname());
     }
-    return User.builder().email(email).userDetail(UserDetail.builder()
-        .nickname(TEMP_USER_NICKNAME).build()).build();
+    return userRepository.save(UserEntity.ofUser(user)).toUser();
+  }
+
+  @Override
+  public boolean isDuplicateEmail(String email) {
+    return userRepository.findByEmail(email).isPresent();
+  }
+
+  @Override
+  public boolean isDuplicateNickname(String nickname) {
+    return userRepository.findByNickname(nickname).isPresent();
   }
 }

@@ -6,5 +6,11 @@ import com.ggg.logg.domain.user.User;
 
 public interface UserService extends ApplicationService {
 
-  User loginByUserEmailAndPassword(String userId, String userPassword);
+  User loginByEmailAndPassword(String email, String password);
+
+  User registerUser(User user);
+
+  boolean isDuplicateEmail(String email);
+
+  boolean isDuplicateNickname(String nickname);
 }
