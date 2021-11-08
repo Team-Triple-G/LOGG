@@ -12,6 +12,7 @@ public class TestConstant {
       User.builder().email(TEST_EMAIL).userDetail(UserDetail.builder().nickname(TEST_NICKNAME).build()).password(TEST_PASSWORD).build();
 
   public static final String INVALID_EMAIL = "Ggg";
+  public static final String INVALID_NICKNAME = "휴흉";
   public static final String INVALID_PASSWORD = "gugugur";
 
 }

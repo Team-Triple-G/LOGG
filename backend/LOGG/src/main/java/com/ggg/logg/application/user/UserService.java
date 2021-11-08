@@ -9,4 +9,8 @@ public interface UserService extends ApplicationService {
   User loginByEmailAndPassword(String email, String password);
 
   User registerUser(User user);
+
+  boolean checkDuplicateEmail(String email);
+
+  boolean checkDuplicateNickname(String nickname);
 }

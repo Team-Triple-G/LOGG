@@ -107,7 +107,7 @@ class UserServiceTest {
 
   @Test
   @DisplayName("회원 가입 정보가 입력되면 사용자를 리포지토리에 저장한다.")
-  public void testRegisterUser() {
+  public void registerUserTest() {
     //given
     UserEntity testUserEntity = UserEntity.ofUser(TEST_USER_DTO);
     given(this.userRepository.save(testUserEntity)).willReturn(testUserEntity);
@@ -117,9 +117,42 @@ class UserServiceTest {
     //when
     User resultUser = userService.registerUser(TEST_USER_DTO);
 
-
     //then
     assertNotNull(resultUser);
     assertEquals(TEST_USER_DTO, resultUser);
+  }
+
+  @Test
+  @DisplayName("중복 이메일을 검사한다.")
+  public void checkDuplicateEmailTest() {
+    //given
+    UserEntity testUserEntity = UserEntity.ofUser(TEST_USER_DTO);
+    given(this.userRepository.findByEmail(TEST_EMAIL)).willReturn(Optional.of(testUserEntity));
+    given(this.userRepository.findByEmail(INVALID_EMAIL)).willReturn(Optional.empty());
+
+    //when
+    boolean failureResult = userService.checkDuplicateEmail(TEST_EMAIL);
+    boolean successResult = userService.checkDuplicateEmail(INVALID_EMAIL);
+
+    //then
+    assertFalse(failureResult);
+    assertTrue(successResult);
+  }
+
+  @Test
+  @DisplayName("중복 닉네임을 검사한다.")
+  public void checkDuplicateNicknameTest() {
+    //given
+    UserEntity testUserEntity = UserEntity.ofUser(TEST_USER_DTO);
+    given(this.userRepository.findByNickname(TEST_NICKNAME)).willReturn(Optional.of(testUserEntity));
+    given(this.userRepository.findByNickname(INVALID_NICKNAME)).willReturn(Optional.empty());
+
+    //when
+    boolean failureResult = userService.checkDuplicateNickname(TEST_NICKNAME);
+    boolean successResult = userService.checkDuplicateNickname(INVALID_NICKNAME);
+
+    //then
+    assertFalse(failureResult);
+    assertTrue(successResult);
   }
 }

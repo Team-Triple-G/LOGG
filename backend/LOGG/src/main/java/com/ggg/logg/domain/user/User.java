@@ -4,6 +4,7 @@ import com.ggg.logg.domain.common.DomainModel;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -39,6 +40,7 @@ public class User {
   }
 
   @Override
+  @Generated
   public boolean equals(Object o) {
     if (!(o instanceof User)) {
       return false;

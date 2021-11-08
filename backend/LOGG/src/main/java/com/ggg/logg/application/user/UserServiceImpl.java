@@ -4,6 +4,7 @@ import com.ggg.logg.domain.user.User;
 import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,16 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User registerUser(User user) {
-
     return userRepository.save(UserEntity.ofUser(user)).toUser();
+  }
+
+  @Override
+  public boolean checkDuplicateEmail(String email) {
+    return !userRepository.findByEmail(email).isPresent();
+  }
+
+  @Override
+  public boolean checkDuplicateNickname(String nickname) {
+    return !userRepository.findByNickname(nickname).isPresent();
   }
 }
