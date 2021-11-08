@@ -2,6 +2,7 @@ package com.ggg.logg.web.controller;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,12 +26,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 /**
  * UserController 슬라이스 테스트
  *
+ * 이메일, 닉네임 중복체크 테스트
+ *
  * author: cherrytomato1
- * version: 1.0.0
+ * version: 1.0.1
+ *
  */
 
 
@@ -48,7 +54,6 @@ class UserControllerTest {
 
   @BeforeEach
   public void setUp() {
-//    this.mockMvc = MockMvcBuilders.standaloneSetup(UserController.class).build();
     this.objectMapper = new ObjectMapper();
   }
 
@@ -113,6 +118,58 @@ class UserControllerTest {
     mockMvcPostAssert(uri, content, exceptedResultString, status().isUnauthorized());
   }
 
+  @Test
+  @DisplayName("이메일 중복체크 컨트롤러를 테스트한다.")
+  public void checkDuplicateUserEmailControllerTest() throws Exception {
+    //given
+    given(this.userService.isDuplicateEmail(TEST_EMAIL)).willReturn(true);
+    given(this.userService.isDuplicateEmail(INVALID_EMAIL)).willReturn(false);
+    String uri = "/api/v1/user/check-email";
+
+    //when
+    ApiResponse<?> duplicateResponse = ApiResponse.of(HttpStatus.CONFLICT, String.format("%s is already "
+        + "used", TEST_EMAIL), TEST_EMAIL);
+    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.OK, "success", TEST_EMAIL);
+    String duplicateExceptedResultString = objectMapper.writeValueAsString(duplicateResponse);
+    String successExceptedResultString = objectMapper.writeValueAsString(successResponse);
+
+    MultiValueMap<String, String> duplicateParams = new LinkedMultiValueMap<>();
+    duplicateParams.add("email", TEST_EMAIL);
+
+    MultiValueMap<String, String> successParams = new LinkedMultiValueMap<>();
+    successParams.add("email", INVALID_EMAIL);
+
+    //then
+    mockMvcGetAssert(uri, duplicateParams, duplicateExceptedResultString, status().isConflict());
+    mockMvcGetAssert(uri, successParams, successExceptedResultString, status().isOk());
+  }
+
+  @Test
+  @DisplayName("닉네임 중복체크 컨트롤러를 테스트한다.")
+  public void checkDuplicateUserNicknameControllerTest() throws Exception {
+    //given
+    given(this.userService.isDuplicateNickname(TEST_NICKNAME)).willReturn(true);
+    given(this.userService.isDuplicateNickname(INVALID_NICKNAME)).willReturn(false);
+    String uri = "/api/v1/user/check-nickname";
+
+    //when
+    ApiResponse<?> duplicateResponse = ApiResponse.of(HttpStatus.CONFLICT, String.format("%s is already "
+        + "used", TEST_NICKNAME), TEST_NICKNAME);
+    ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.OK, "success", TEST_NICKNAME);
+    String duplicateExceptedResultString = objectMapper.writeValueAsString(duplicateResponse);
+    String successExceptedResultString = objectMapper.writeValueAsString(successResponse);
+
+    MultiValueMap<String, String> duplicateParams = new LinkedMultiValueMap<>();
+    duplicateParams.add("nickname", TEST_NICKNAME);
+
+    MultiValueMap<String, String> successParams = new LinkedMultiValueMap<>();
+    successParams.add("nickname", INVALID_NICKNAME);
+
+    //then
+    mockMvcGetAssert(uri, duplicateParams, duplicateExceptedResultString, status().isConflict());
+    mockMvcGetAssert(uri, successParams, successExceptedResultString, status().isOk());
+  }
+
   private void mockMvcPostAssert(String uri, String content, String exceptedResultString,
       ResultMatcher exceptedResultMat) throws Exception {
 
@@ -124,4 +181,15 @@ class UserControllerTest {
         .andExpect(content().string(exceptedResultString))
         .andDo(print());
   }
+
+  private void mockMvcGetAssert(String uri, MultiValueMap<String, String> params,
+      String exceptedResultString, ResultMatcher exceptedResultMat) throws Exception {
+
+    mockMvc.perform(get(uri)
+        .params(params))
+        .andExpect(exceptedResultMat)
+        .andExpect(content().string(exceptedResultString))
+        .andDo(print());
+  }
+
 }

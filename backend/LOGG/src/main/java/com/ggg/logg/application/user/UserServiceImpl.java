@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public boolean checkDuplicateEmail(String email) {
-    return !userRepository.findByEmail(email).isPresent();
+  public boolean isDuplicateEmail(String email) {
+    return userRepository.findByEmail(email).isPresent();
   }
 
   @Override
-  public boolean checkDuplicateNickname(String nickname) {
-    return !userRepository.findByNickname(nickname).isPresent();
+  public boolean isDuplicateNickname(String nickname) {
+    return userRepository.findByNickname(nickname).isPresent();
   }
 }

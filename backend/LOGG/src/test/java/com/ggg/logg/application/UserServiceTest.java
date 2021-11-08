@@ -131,8 +131,8 @@ class UserServiceTest {
     given(this.userRepository.findByEmail(INVALID_EMAIL)).willReturn(Optional.empty());
 
     //when
-    boolean failureResult = userService.checkDuplicateEmail(TEST_EMAIL);
-    boolean successResult = userService.checkDuplicateEmail(INVALID_EMAIL);
+    boolean successResult = userService.isDuplicateEmail(TEST_EMAIL);
+    boolean failureResult = userService.isDuplicateEmail(INVALID_EMAIL);
 
     //then
     assertFalse(failureResult);
@@ -148,8 +148,8 @@ class UserServiceTest {
     given(this.userRepository.findByNickname(INVALID_NICKNAME)).willReturn(Optional.empty());
 
     //when
-    boolean failureResult = userService.checkDuplicateNickname(TEST_NICKNAME);
-    boolean successResult = userService.checkDuplicateNickname(INVALID_NICKNAME);
+    boolean failureResult = userService.isDuplicateNickname(TEST_NICKNAME);
+    boolean successResult = userService.isDuplicateNickname(INVALID_NICKNAME);
 
     //then
     assertFalse(failureResult);

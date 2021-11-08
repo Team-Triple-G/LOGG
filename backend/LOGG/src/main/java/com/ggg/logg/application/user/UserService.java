@@ -10,7 +10,7 @@ public interface UserService extends ApplicationService {
 
   User registerUser(User user);
 
-  boolean checkDuplicateEmail(String email);
+  boolean isDuplicateEmail(String email);
 
-  boolean checkDuplicateNickname(String nickname);
+  boolean isDuplicateNickname(String nickname);
 }
