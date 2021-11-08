@@ -6,8 +6,10 @@ import static org.mockito.BDDMockito.given;
 
 import com.ggg.logg.application.user.UserService;
 import com.ggg.logg.application.user.UserServiceImpl;
+import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.User;
 
+import com.ggg.logg.domain.user.UserDetail;
 import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
@@ -155,5 +157,37 @@ class UserServiceTest {
     //then
     assertFalse(failureResult);
     assertTrue(successResult);
+  }
+
+  @Test
+  @DisplayName("회원 가입 서비스를 테스트한다")
+  public void registerUserServiceTest() {
+    //given
+    User duplicateEmailUser =
+        User.builder().email(INVALID_EMAIL)
+            .userDetail(UserDetail.builder().nickname(TEST_NICKNAME).build()).build();
+    User duplicateNicknameUser =
+        User.builder().email(TEST_EMAIL)
+            .userDetail(UserDetail.builder().nickname(INVALID_NICKNAME).build()).build();
+    UserEntity testEntity = UserEntity.ofUser(TEST_USER_DTO);
+
+    given(this.userRepository.findByEmail(TEST_EMAIL)).willReturn(Optional.empty());
+    given(this.userRepository.findByEmail(INVALID_EMAIL)).willReturn(Optional.of(testEntity));
+    given(this.userRepository.findByNickname(TEST_NICKNAME))
+        .willReturn(Optional.empty());
+    given(this.userRepository.findByNickname(INVALID_NICKNAME)).willReturn(Optional.of(testEntity));
+
+    given(this.userRepository.save(UserEntity.ofUser(duplicateEmailUser))).willReturn(null);
+    given(this.userRepository.save(UserEntity.ofUser(duplicateNicknameUser))).willReturn(null);
+    given(this.userRepository.save(testEntity)).willReturn(testEntity);
+
+    //when
+    User successUserResult = userService.registerUser(TEST_USER_DTO);
+
+    //then
+    assertThrows(DuplicatedException.class, () -> userService.registerUser(duplicateEmailUser));
+    assertThrows(DuplicatedException.class, () -> userService.registerUser(duplicateNicknameUser));
+
+    assertEquals(TEST_USER_DTO, successUserResult);
   }
 }

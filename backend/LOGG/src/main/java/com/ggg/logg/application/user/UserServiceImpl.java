@@ -1,5 +1,6 @@
 package com.ggg.logg.application.user;
 
+import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.User;
 import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
@@ -30,6 +31,12 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User registerUser(User user) {
+    if (isDuplicateEmail(user.getEmail())) {
+      throw new DuplicatedException("email", user.getEmail());
+    }
+    if (isDuplicateNickname(user.getUserDetail().getNickname())) {
+      throw new DuplicatedException("nickname", user.getUserDetail().getNickname());
+    }
     return userRepository.save(UserEntity.ofUser(user)).toUser();
   }
 
