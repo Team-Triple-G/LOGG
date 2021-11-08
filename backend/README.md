@@ -2,8 +2,84 @@
 
 ## 서버
 
-- LOGG
-  - port: 8080
+### LOGG
+ - port: 8080
+ - 폴더 구조
+ ```
+ ├── main
+│   ├── java
+│   │   └── com
+│   │       └── ggg
+│   │           └── logg
+│   │               ├── LoggApplication.java
+│   │               ├── application
+│   │               │   ├── ApplicationService.java
+│   │               │   └── user
+│   │               │       ├── UserService.java
+│   │               │       └── UserServiceImpl.java
+│   │               ├── domain
+│   │               │   ├── common
+│   │               │   │   ├── BaseEntity.java
+│   │               │   │   ├── DomainModel.java
+│   │               │   │   ├── DuplicatedException.java
+│   │               │   │   ├── HashIdGenerator.java
+│   │               │   │   └── ResourceNotFoundException.java
+│   │               │   └── user
+│   │               │       ├── User.java
+│   │               │       ├── UserDetail.java
+│   │               │       ├── UserEntity.java
+│   │               │       ├── exception
+│   │               │       │   ├── IllegalPasswordException.java
+│   │               │       │   └── UserNotFoundException.java
+│   │               │       └── repository
+│   │               │           ├── CustomizedUserRepository.java
+│   │               │           └── UserRepository.java
+│   │               ├── infrastructure
+│   │               │   └── domain
+│   │               │       └── jpa
+│   │               │           ├── config
+│   │               │           │   └── QueryDslConfig.java
+│   │               │           └── user
+│   │               │               ├── JPAUserRepository.java
+│   │               │               └── JPAUserRepositoryImpl.java
+│   │               └── web
+│   │                   ├── advice
+│   │                   │   └── ControllerAdvice.java
+│   │                   ├── controller
+│   │                   │   └── UserController.java
+│   │                   ├── request
+│   │                   │   └── user
+│   │                   │       ├── UserLoginRequest.java
+│   │                   │       └── UserRegisterRequest.java
+│   │                   └── response
+│   │                       ├── ApiResponse.java
+│   │                       └── user
+│   │                           └── UserLoginResponse.java
+│   └── resources
+│       ├── application.yml
+│       ├── static
+│       └── templates
+└── test
+    └── java
+        └── com
+            └── ggg
+                └── logg
+                    ├── LoggApplicationTests.java
+                    ├── TestConstant.java
+                    ├── application
+                    │   └── UserServiceTest.java
+                    ├── domain
+                    │   └── user
+                    │       └── UserRepositoryTest.java
+                    ├── infrastructure
+                    │   └── domain
+                    │       └── jpa
+                    │           └── user
+                    └── web
+                        └── controller
+                            ├── MockMvcFilterConfig.java
+                            └── UserControllerTest.java
+ ```
 
 ## 스택
 
