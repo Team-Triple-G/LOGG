@@ -36,7 +36,9 @@ import org.springframework.util.MultiValueMap;
  * <p>
  * 회원가입 컨트롤러 테스트
  * <p>
- * author: cherrytomato1 version: 1.0.2
+ *
+ * @author cherrytomato1
+ * @version 1.0.2
  */
 
 
@@ -184,7 +186,8 @@ class UserControllerTest {
     String uri = "/api/v1/user/register";
 
     UserRegisterRequest userRegisterRequest =
-        UserRegisterRequest.builder().email(TEST_EMAIL).nickname(TEST_NICKNAME).password(TEST_PASSWORD).build();
+        UserRegisterRequest.builder().email(TEST_EMAIL).nickname(TEST_NICKNAME)
+            .password(TEST_PASSWORD).build();
 
     //when
     ApiResponse<?> successResponse = ApiResponse.of(HttpStatus.CREATED, "success", TEST_EMAIL);

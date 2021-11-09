@@ -26,6 +26,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+/**
+ * UserService의 테스트
+ * <p>
+ * 회원가입 서비스 테스트 추가
+ *
+ * @author cherrytomato1
+ * @version 1.0.4
+ */
+
 @ExtendWith(SpringExtension.class)
 class UserServiceTest {
 

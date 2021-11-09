@@ -12,6 +12,13 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * JPA Entity 상위 추상 클래스. 공통으로 필요한 colum 작성
+ *
+ * @author cherrytomato1
+ * @version 1.0.0
+ */
+
 @ToString
 @Getter
 @MappedSuperclass

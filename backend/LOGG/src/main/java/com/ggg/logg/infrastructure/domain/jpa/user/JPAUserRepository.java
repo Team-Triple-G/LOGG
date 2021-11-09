@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 /**
  * UserRepository를 JPARepository로 구현할 인터페이스
  *
- * author: cherrytomato1
- * version: 1.0.0
+ * @author cherrytomato1
+ * @version 1.0.0
  */
 
 @Repository("UserRepository")

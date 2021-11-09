@@ -5,14 +5,15 @@ import lombok.Getter;
 
 /**
  * 로그인 요청에 대한 리스폰스.
- *
+ * <p>
  * 파라미터값 userId -> email
- * author: cherrytomato1
- * version: 1.0.1
  *
+ * @author cherrytomato1
+ * @version 1.0.1
  */
 @Getter
 public class UserLoginResponse {
+
   String email;
   String nickname;
 

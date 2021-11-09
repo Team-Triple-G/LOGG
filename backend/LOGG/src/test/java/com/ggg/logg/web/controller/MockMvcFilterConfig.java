@@ -20,6 +20,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @interface MockMvcFilterConfig {
 
   class MockMVcFilterConfig {
+
     @Bean
     MockMvcBuilderCustomizer utf8Config() {
       return builder ->

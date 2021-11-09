@@ -14,11 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static com.ggg.logg.TestConstant.*;
 
 /**
- *
  * UserRepository의 테스트
  *
- * author: cherrytomato1
- * version: 1.0.0
+ * 비밀번호 받기 테스트 추가
+ * @author cherrytomato1
+ * @version 1.0.1
  */
 @SpringBootTest
 class UserRepositoryTest {

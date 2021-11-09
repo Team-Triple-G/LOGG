@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 컨트롤러 단 예외 발생 시 예외처리 어드바이스
- *
+ * <p>
  * duplicated exception 핸들링
  *
- * author: cherrytomato1
- * version: 1.0.1
+ * @author cherrytomato1
+ * @version 1.0.1
  */
 
 @RestControllerAdvice

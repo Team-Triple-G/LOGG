@@ -3,6 +3,15 @@ package com.ggg.logg;
 import com.ggg.logg.domain.user.User;
 import com.ggg.logg.domain.user.UserDetail;
 
+/**
+ * 테스트에 사용할 상수 객체 정의
+ * <p>
+ * invalid user dto 추가
+ *
+ * @author cherrytomato1
+ * @version 1.0.2
+ */
+
 public class TestConstant {
 
   public static final String TEST_EMAIL = "ggg@ggg.com";

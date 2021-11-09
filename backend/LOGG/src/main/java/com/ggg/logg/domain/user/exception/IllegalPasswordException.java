@@ -5,10 +5,11 @@ import org.springframework.http.HttpStatus;
 
 /**
  * 비밀번호 입력 오류시 발생하는 예외
- *
+ * <p>
  * private 설정 및 getter 추가
- * author: cherrytomato1
- * version: 1.0.2
+ *
+ * @author cherrytomato1
+ * @version 1.0.2
  */
 
 @Getter

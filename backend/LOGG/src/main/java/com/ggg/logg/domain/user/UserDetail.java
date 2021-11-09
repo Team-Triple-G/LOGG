@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 /**
  * User aggregate 중 상세 정보
  *
- * author: cherrytomato1
- * version: 1.0.0
+ * @author cherrytomato1
+ * @version 1.0.0
  */
 
 @Builder
@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDetail {
+
   private String nickname;
   private String description;
 }

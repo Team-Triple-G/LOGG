@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * User관련 api.
+ * User 관련 api.
+ * <p>
+ * 회원가입 컨트롤러 추가
  *
- * 회원가입 컨트롤러
- *
- * author: cherrytomato1
- * version: 1.0.3
+ * @author cherrytomato1
+ * @version 1.0.3
  */
 @CrossOrigin("*")
 @RestController

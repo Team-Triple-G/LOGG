@@ -10,7 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * user 도메인의 서비스
+ * user application service의 서비스 구현체
+ * <p>
+ * 중복체크 메서드 추가
+ *
+ * @author cherrytomato1
+ * @version 1.0.2
  */
 
 @Slf4j

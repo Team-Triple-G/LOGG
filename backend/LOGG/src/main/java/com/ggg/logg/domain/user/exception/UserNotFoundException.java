@@ -6,8 +6,8 @@ import com.ggg.logg.infrastructure.domain.jpa.user.UserEntity;
 /**
  * User엔티티를 찾지 못할 때 발생하는 예외
  *
- * author: cherrytomato1
- * version: 1.0.0
+ * @author cherrytomato1
+ * @version 1.0.0
  */
 public class UserNotFoundException extends ResourceNotFoundException {
 

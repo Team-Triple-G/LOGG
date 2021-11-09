@@ -5,6 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+/**
+ * 모든 response를 담는 클래스
+ *
+ * @param <T> 데이터 타입
+ * @author cherrytomato1
+ * @version 1.0.0
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

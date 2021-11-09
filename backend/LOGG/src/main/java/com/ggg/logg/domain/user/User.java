@@ -12,11 +12,10 @@ import lombok.ToString;
 /**
  * User aggregate 루트 도메인
  * <p>
- *
  * equals override
  *
- * author: cherrytomato1
- * version: 1.0.2
+ * @author cherrytomato1
+ * @version 1.0.2
  */
 
 @DomainModel

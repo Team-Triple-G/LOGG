@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 
 /**
  * 로그인 요청을 처리하기 위한 DTO
- *
+ * <p>
  * userId -> email, userPassword -> password
- * author: cherrytomato1
- * version: 1.0.1
  *
+ * @author cherrytomato1
+ * @version 1.0.1
  */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginRequest {
+
   String email;
   String password;
 }

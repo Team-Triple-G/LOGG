@@ -13,12 +13,11 @@ import lombok.ToString;
 
 /**
  * user의 JPA 전용 엔티티
- * <p>
+ *
  * equals override
- * <p>
- * @author: cherrytomato1
- * <p>
- * @version: 1.0.2
+ *
+ * @author cherrytomato1
+ * @version 1.0.2
  */
 
 @Entity(name = "user")
