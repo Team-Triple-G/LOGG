@@ -1,6 +1,5 @@
 package com.ggg.logg.infrastructure.domain.jpa.user;
 
-import com.ggg.logg.domain.user.QUserEntity;
 import com.ggg.logg.domain.user.repository.CustomizedUserRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

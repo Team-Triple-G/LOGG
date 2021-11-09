@@ -1,4 +1,4 @@
-package com.ggg.logg.domain.common;
+package com.ggg.logg.infrastructure.domain.jpa;
 
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;

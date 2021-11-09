@@ -1,7 +1,7 @@
 package com.ggg.logg.domain.user.exception;
 
 import com.ggg.logg.domain.common.ResourceNotFoundException;
-import com.ggg.logg.domain.user.UserEntity;
+import com.ggg.logg.infrastructure.domain.jpa.user.UserEntity;
 
 /**
  * User엔티티를 찾지 못할 때 발생하는 예외

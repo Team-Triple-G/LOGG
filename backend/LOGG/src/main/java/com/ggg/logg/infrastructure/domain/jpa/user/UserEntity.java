@@ -1,6 +1,8 @@
-package com.ggg.logg.domain.user;
+package com.ggg.logg.infrastructure.domain.jpa.user;
 
-import com.ggg.logg.domain.common.BaseEntity;
+import com.ggg.logg.domain.user.User;
+import com.ggg.logg.domain.user.UserDetail;
+import com.ggg.logg.infrastructure.domain.jpa.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -14,9 +16,9 @@ import lombok.ToString;
  * <p>
  * equals override
  * <p>
- * author: cherrytomato1
+ * @author: cherrytomato1
  * <p>
- * version: 1.0.2
+ * @version: 1.0.2
  */
 
 @Entity(name = "user")

@@ -1,6 +1,6 @@
 package com.ggg.logg.domain.user.repository;
 
-import com.ggg.logg.domain.user.UserEntity;
+import com.ggg.logg.infrastructure.domain.jpa.user.UserEntity;
 import java.util.Optional;
 
 /**

@@ -10,7 +10,7 @@ import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.User;
 
 import com.ggg.logg.domain.user.UserDetail;
-import com.ggg.logg.domain.user.UserEntity;
+import com.ggg.logg.infrastructure.domain.jpa.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.IllegalPasswordException;
 import com.ggg.logg.domain.common.ResourceNotFoundException;

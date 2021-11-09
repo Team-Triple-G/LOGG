@@ -1,6 +1,5 @@
 package com.ggg.logg.infrastructure.domain.jpa.user;
 
-import com.ggg.logg.domain.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

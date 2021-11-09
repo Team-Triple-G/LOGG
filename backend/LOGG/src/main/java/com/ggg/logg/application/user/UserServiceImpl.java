@@ -2,10 +2,9 @@ package com.ggg.logg.application.user;
 
 import com.ggg.logg.domain.common.DuplicatedException;
 import com.ggg.logg.domain.user.User;
-import com.ggg.logg.domain.user.UserEntity;
+import com.ggg.logg.infrastructure.domain.jpa.user.UserEntity;
 import com.ggg.logg.domain.user.repository.UserRepository;
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

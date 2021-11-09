@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.ggg.logg.domain.user.exception.UserNotFoundException;
 import com.ggg.logg.domain.user.repository.UserRepository;
+import com.ggg.logg.infrastructure.domain.jpa.user.UserEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

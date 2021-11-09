@@ -1,4 +1,4 @@
-package com.ggg.logg.domain.common;
+package com.ggg.logg.infrastructure.domain.jpa;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;
@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
-  @GenericGenerator(name = "HashIdGenerator", strategy = "com.ggg.logg.domain.common"
+  @GenericGenerator(name = "HashIdGenerator", strategy = "com.ggg.logg.infrastructure.domain.jpa"
       + ".HashIdGenerator")
   @GeneratedValue(generator = "HashIdGenerator")
   @Id
