@@ -14,6 +14,6 @@ import java.util.Optional;
 
 public interface UserRepository extends CustomizedUserRepository {
   Optional<UserEntity> findByEmail(String email);
-  Optional<UserEntity> findByNickname(String email);
+  Optional<UserEntity> findByNickname(String nickname);
   <S extends UserEntity> S save(S entity);
 }
